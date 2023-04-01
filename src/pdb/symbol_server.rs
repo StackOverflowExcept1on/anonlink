@@ -1,5 +1,5 @@
 use pelite::pe64::debug::{CodeView, Entry};
-use pelite::pe64::image::IMAGE_DEBUG_CV_INFO_PDB70;
+use pelite::pe64::image::{GUID, IMAGE_DEBUG_CV_INFO_PDB70};
 use pelite::pe64::{Pe, PeFile};
 use pelite::util::CStr;
 
@@ -55,17 +55,17 @@ pub fn lookup(file: PeFile) -> pelite::Result<PossibleDebugData> {
         filename = filename[(pos + 1)..].to_string();
     }
 
-    let signature = image.Signature;
+    let GUID {
+        Data1: data1,
+        Data2: data2,
+        Data3: data3,
+        Data4: data4,
+    } = image.Signature;
 
-    Ok(PossibleDebugData {
-        filename,
-        hash: format!(
-            "{:08X}{:04X}{:04X}{:016X}{:X}",
-            signature.Data1,
-            signature.Data2,
-            signature.Data3,
-            u64::from_be_bytes(image.Signature.Data4),
-            image.Age,
-        ),
-    })
+    let data4 = u64::from_be_bytes(data4);
+    let age = image.Age;
+
+    let hash = format!("{data1:08X}{data2:04X}{data3:04X}{data4:016X}{age:X}");
+
+    Ok(PossibleDebugData { filename, hash })
 }
