@@ -1,6 +1,6 @@
 # anonlink
 
-[![Build Status](https://github.com/StackOverflowExcept1on/anonlink/actions/workflows/main.yml/badge.svg)](https://github.com/StackOverflowExcept1on/anonlink/actions/workflows/main.yml)
+[![Build Status](https://github.com/StackOverflowExcept1on/anonlink/actions/workflows/ci.yml/badge.svg)](https://github.com/StackOverflowExcept1on/anonlink/actions/workflows/ci.yml)
 [![Latest Version](https://img.shields.io/crates/v/anonlink.svg)](https://crates.io/crates/anonlink)
 
 Command line tool to automatically patch link.exe to remove Rich PE Header

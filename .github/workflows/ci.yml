@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@nightly
+      - run: cargo run --verbose --release
