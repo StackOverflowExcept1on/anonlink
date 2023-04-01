@@ -94,10 +94,8 @@ fn main() -> Result<()> {
         .find(|inst| inst.is_call_near() && inst.near_branch_target() == cb_build_prod_id_block)
         .expect("failed to find call instruction");
 
-    println!(
-        "Found call instruction at address {:02X?}",
-        pe_file.optional_header().ImageBase + inst.ip()
-    );
+    let address = pe_file.optional_header().ImageBase + inst.ip();
+    println!("Found call instruction at address {address:02X?}");
 
     //add reg32, reg32
     let inst = decoder
@@ -105,10 +103,8 @@ fn main() -> Result<()> {
         .find(|inst| inst.code() == Code::Add_r32_rm32)
         .expect("failed to find add instruction");
 
-    println!(
-        "Found add instruction at address {:02X?}",
-        pe_file.optional_header().ImageBase + inst.ip()
-    );
+    let address = pe_file.optional_header().ImageBase + inst.ip();
+    println!("Found add instruction at address {address:02X?}");
 
     let raw_offset = inst.ip() - section_range.start as u64;
     let file_offset = section.PointerToRawData as u64 + raw_offset;
@@ -120,7 +116,7 @@ fn main() -> Result<()> {
     file.read_exact(&mut buf)?;
 
     let patched = vec![0x90; inst.len()];
-    println!("Patching bytes {:02X?} => {:02X?}", buf, patched);
+    println!("Patching bytes {buf:02X?} => {patched:02X?}");
     file.seek(io::SeekFrom::Start(file_offset))?;
     file.write_all(&patched)?;
 
