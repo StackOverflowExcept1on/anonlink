@@ -8,10 +8,11 @@ pub trait OutputExt: Sized {
 impl OutputExt for Output {
     #[inline]
     fn exit_result(self) -> io::Result<Self> {
-        self.status
-            .exit_ok()
-            .map_err(|_| io::Error::from(io::ErrorKind::InvalidInput))?;
-        Ok(self)
+        if self.status.success() {
+            Ok(self)
+        } else {
+            Err(io::Error::from(io::ErrorKind::InvalidInput))
+        }
     }
 }
 

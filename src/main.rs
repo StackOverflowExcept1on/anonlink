@@ -1,5 +1,3 @@
-#![feature(exit_status_error)]
-
 use iced_x86::{Code, Decoder, DecoderOptions};
 use pelite::pe64::{Pe, PeFile};
 use std::io::{Read, Seek, Write};
