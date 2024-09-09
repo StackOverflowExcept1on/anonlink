@@ -1,6 +1,6 @@
 [package]
 name = "anonlink"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["StackOverflowExcept1on"]
 edition = "2021"
 description = "Command line tool to automatically patch link.exe to remove Rich PE Header"

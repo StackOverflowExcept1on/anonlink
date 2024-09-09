@@ -11,7 +11,7 @@ TL;DR: when you building exe file with MSVC toolchain, Microsoft leaks some info
 version of compiler and number of C/C++ source files
 
 For more advanced
-users: [The Undocumented Microsoft "Rich" Header](https://bytepointer.com/articles/the_microsoft_rich_header.htm)
+users: [The Undocumented Microsoft "Rich" Header](http://web.archive.org/web/20240229114512/https://bytepointer.com/articles/the_microsoft_rich_header.htm)
 
 
 ### Installing from [crates.io](https://crates.io/crates/anonlink)
