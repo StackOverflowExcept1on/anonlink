@@ -11,7 +11,7 @@ pub enum Error {
     #[error("failed to parse PDB file: {0}")]
     PdbFile(#[from] pdb::Error),
     #[error("failed to make request: {0}")]
-    Request(#[from] ureq::Error),
+    Request(#[from] Box<ureq::Error>),
     #[error("iced-x86 error: {0}")]
     Iced(#[from] iced_x86::IcedError),
 }

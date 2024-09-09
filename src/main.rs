@@ -36,7 +36,7 @@ fn locate_link() -> io::Result<PathBuf> {
     let vcvars64 = output.stdout.read_process_line()?;
 
     let output = Command::new("cmd")
-        .raw_arg(&format!("/C \"call \"{vcvars64}\" > NUL && where link\""))
+        .raw_arg(format!("/C \"call \"{vcvars64}\" > NUL && where link\""))
         .output()?
         .exit_result()?;
 

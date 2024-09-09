@@ -2,7 +2,9 @@ name: CI
 
 on:
   push:
+    branches: [ master ]
   pull_request:
+    branches: [ master ]
   workflow_dispatch:
 
 env:
@@ -10,10 +12,11 @@ env:
 
 jobs:
   build:
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
       - uses: dtolnay/rust-toolchain@nightly
-      - run: cargo run --verbose --release
+
+      - run: cargo run --release

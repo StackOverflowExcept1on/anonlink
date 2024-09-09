@@ -38,7 +38,7 @@ pub fn download_symbols(file: PeFile) -> crate::Result<RemoteSymbolResolver> {
     let debug_data = super::symbol_server::lookup(file)?;
     let pdb_link = debug_data.pdb_link();
 
-    let resp = ureq::get(&pdb_link).call()?;
+    let resp = ureq::get(&pdb_link).call().map_err(Box::new)?;
 
     let mut buf = Vec::new();
     resp.into_reader().read_to_end(&mut buf)?;

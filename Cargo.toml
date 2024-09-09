@@ -1,6 +1,6 @@
 [package]
 name = "anonlink"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["StackOverflowExcept1on"]
 edition = "2021"
 description = "Command line tool to automatically patch link.exe to remove Rich PE Header"
@@ -11,15 +11,14 @@ categories = ["command-line-utilities"]
 
 [dependencies]
 thiserror = "1.0"
-pelite = "0.10.0"
-pdb = "0.8.0"
-ureq = "2.6.2"
-iced-x86 = "1.18.0"
+pelite = "0.10"
+pdb = "0.8"
+ureq = "2.10"
+iced-x86 = "1.21"
 
 [profile.release]
-lto = true
-strip = "symbols"
-debug = false
-panic = "abort"
 opt-level = "z"
+strip = "symbols"
+lto = true
+panic = "abort"
 codegen-units = 1
