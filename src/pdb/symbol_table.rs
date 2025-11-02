@@ -28,7 +28,7 @@ impl SymbolResolver for RemoteSymbolResolver {
         _instruction_operand: Option<u32>,
         address: u64,
         _address_size: u32,
-    ) -> Option<SymbolResult> {
+    ) -> Option<SymbolResult<'_>> {
         self.rva2symbol(&address)
             .map(|symbol_string| SymbolResult::with_str(address, symbol_string.as_str()))
     }
@@ -41,7 +41,8 @@ pub fn download_symbols(file: PeFile) -> crate::Result<RemoteSymbolResolver> {
     let resp = ureq::get(&pdb_link).call().map_err(Box::new)?;
 
     let mut buf = Vec::new();
-    resp.into_reader().read_to_end(&mut buf)?;
+    let (_, body) = resp.into_parts();
+    body.into_reader().read_to_end(&mut buf)?;
 
     let cursor = io::Cursor::new(buf);
 
